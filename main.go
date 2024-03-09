@@ -7,6 +7,7 @@ import (
 	"os/exec"
 )
 
+// All comment are personal just to remind myself of some of the flow
 func main() {
 	type Config struct {
 		Directory string `json:"Directory"`
@@ -14,12 +15,15 @@ func main() {
 	userCommand := ""
 	// userArg := ""
 
+	// os.Args by default is 1 because when you use >My-Workspace that is already 1
+	// Look for 2 or more when looking for arguments
 	if len(os.Args) >= 2 {
 		userCommand = os.Args[1]
 	}
 	if len(os.Args) >= 3 {
 		// userArg = os.Args[2]
 	}
+	//wd = Working Directory
 	d, err := os.Getwd()
 	if err != nil {
 		fmt.Println("Error trying to get current dir: ", err)
@@ -32,6 +36,7 @@ func main() {
 			// "" + userArg + "": "TestMessage",
 			"Directory": "" + d + "",
 		}
+		//Marshaling is taking an Obj or Struct and formating into JSON string
 		jsonData, err := json.MarshalIndent(jsonMsg, "", "   ")
 		if err != nil {
 			fmt.Println("Error marshaling JSON:", err)
